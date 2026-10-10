@@ -1,0 +1,11 @@
+{:paths ["src"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.3"}
+        metosin/malli {:mvn/version "0.20.1"}}
+ :aliases
+ {:test
+  {:extra-paths ["test"]
+   :main-opts ["-m" "rich-document.test-runner"]}
+  :cljs-test
+  {:extra-paths ["test"]
+   :extra-deps {org.clojure/clojurescript {:mvn/version "1.12.42"}
+                thheller/shadow-cljs {:mvn/version "3.2.1"}}}}}

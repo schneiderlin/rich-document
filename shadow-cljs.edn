@@ -1,0 +1,6 @@
+{:deps true
+ :builds
+ {:test
+  {:target :node-test
+   :output-to ".runtime/cljs-tests.cjs"
+   :ns-regexp "-test$"}}}
