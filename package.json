@@ -2,6 +2,11 @@
   "name": "@schneiderlin/rich-document",
   "version": "0.1.0",
   "description": "Extensible canonical rich-document model and Tiptap adapter",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schneiderlin/rich-document.git"
+  },
   "type": "module",
   "files": [
     "src"

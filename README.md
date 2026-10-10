@@ -81,7 +81,15 @@ Clojure consumers put `src` on the classpath through a Git or local dependency.
 Browser consumers must provide compatible Tiptap 3 packages listed as peer
 dependencies in `package.json`.
 
-For local development:
+Use an immutable commit SHA in shared projects:
+
+```clojure
+io.github.schneiderlin/rich-document
+{:git/url "https://github.com/schneiderlin/rich-document.git"
+ :git/sha "<commit-sha>"}
+```
+
+For local development, replace the Git coordinate with:
 
 ```clojure
 io.github.schneiderlin/rich-document
@@ -94,3 +102,7 @@ io.github.schneiderlin/rich-document
 bun install
 bun run check
 ```
+
+## License
+
+MIT
