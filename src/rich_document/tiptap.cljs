@@ -14,18 +14,21 @@
 ;; keys, and keyword destructuring of a string-keyed map yields `nil` — which
 ;; decoded as a valid empty document instead of failing. A bridge payload is
 ;; exactly where that happened, so this namespace walks the value itself.
+;;
+;; The classification goes through `goog/typeOf`, the tag lookup cljs.core itself
+;; uses. Naming the property directly (e.g. `Object.prototype.toString`) survives
+;; development builds but is renamed by `:advanced` compilation.
 
-(def ^:private object-tag "[object Object]")
-(def ^:private array-tag "[object Array]")
-
-(defn- tag-of [^js value]
-  (.call (.-toString js/Object.prototype) value))
+(def ^:private object-tags #{"object" "arraylike"})
 
 (defn- js-array? [value]
-  (and (some? value) (identical? array-tag (tag-of value))))
+  (identical? "array" (goog/typeOf value)))
 
-(defn- js-object? [value]
-  (and (some? value) (identical? object-tag (tag-of value))))
+(defn- js-object?
+  "True for a JS object value of any prototype, including the null-prototype
+  attribute maps ProseMirror returns and objects from another realm."
+  [value]
+  (contains? object-tags (goog/typeOf value)))
 
 (defn js->tiptap-data
   "Keyword-keyed Clojure data for a Tiptap JSON value that crossed the JS boundary."
