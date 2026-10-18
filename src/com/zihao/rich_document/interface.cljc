@@ -26,5 +26,6 @@
    (do
      (def canonical->tiptap tiptap/canonical->tiptap)
      (def tiptap->canonical tiptap/tiptap->canonical)
+     (def js-tiptap->canonical tiptap/js-tiptap->canonical)
      (def canonical-node->tiptap tiptap/canonical-node->tiptap)
      (def tiptap-node->canonical tiptap/tiptap-node->canonical)))

@@ -58,6 +58,16 @@ map:
 Built-in headings, paragraphs, lists, code blocks, dividers, text, and marks do
 not need host codecs.
 
+`tiptap->canonical` takes keyword-keyed Clojure data and throws when it is not a
+Tiptap document, so a mismatched input never decodes as an empty document.
+
+The controller reports the document back through `options.onDocumentUpdate` as a
+JavaScript value, so decode that payload with
+`rich-document.tiptap/js-tiptap->canonical` (or `js->tiptap-data` for the
+intermediate data). Do not hand it to `js->clj`: that keeps string keys, which
+keyword destructuring reads as `nil`, and it skips objects that do not have
+`js/Object` as their prototype — including ProseMirror's attribute maps.
+
 ### Tiptap controller
 
 `createRichDocumentEditor(element, content, options, config)` from
